@@ -4,7 +4,7 @@ Los cambios de cada versión de `rayacash-identity` (Raya Identity.js), la misma
 
 En el CDN, cada versión es inmutable en su carpeta (`https://js.raya.cash/identity/v1.0.0/identity.js`) y `https://js.raya.cash/identity/v1/identity.js` sirve siempre la última 1.x. Para fijar una versión con `integrity`, usá el hash que figura en su entrada.
 
-## 1.0.0 (sin publicar)
+## 1.0.0
 
 Primera versión.
 
@@ -17,4 +17,5 @@ Primera versión.
 - `identity.close()`: cierra el flujo abierto de la página.
 - Panel para seguir en una pestaña nueva cuando la cámara no se puede usar acá o el iframe no carga.
 - CSP: `frame-src https://raya.cash` siempre, más `script-src https://js.raya.cash` con el `<script>` del CDN. Si tu sitio manda `Permissions-Policy`, `camera=(self "https://raya.cash")`.
-- `integrity` de `v1.0.0/identity.js` en el CDN: se completa al subirla.
+- `integrity` de `v1.0.0/identity.js` en el CDN: `sha384-Qcc8fBYBJnks2IPhMlxRsSPo74UYLlY8XKsE/1/DxnrJd9JN1pC6BNanrwPkmvIf`
+- `integrity` de `v1.0.0/identity.mjs` en el CDN: `sha384-h8QP6U4TbLiOd8PoBvrDEJqMG8gg1IIYwi32c/U/cYc0nY0xipX1JvbcNc0fcJ4X`
