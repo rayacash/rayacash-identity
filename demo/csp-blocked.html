@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; frame-src 'none'" />
+    <title>Raya Identity.js - demo con el iframe bloqueado</title>
+    <link rel="stylesheet" href="demo.css" />
+    <script src="demo.js" defer></script>
+  </head>
+  <body class="idj-body">
+    <main class="idj-main">
+      <h1 class="idj-title">Raya Identity.js</h1>
+      <p class="idj-muted">frame-src none: el panel tiene que aparecer al instante, con frame_blocked. No guarda nada. Corre con <code>npm run demo</code>.</p>
+
+      <section class="idj-card">
+        <label class="idj-field">
+          <span>Entorno</span>
+          <select id="environment">
+            <option value="fake" selected>Falso (este servidor en localhost)</option>
+            <option value="production">Producción</option>
+          </select>
+        </label>
+
+        <div id="danger" class="idj-danger" hidden>
+          <p>Una verificación que termina aprobada se cobra.</p>
+          <label class="idj-check"><input id="understood" type="checkbox" /> Entiendo</label>
+        </div>
+
+        <label class="idj-field" id="scenario-field">
+          <span>Escenario</span>
+          <select id="scenario"></select>
+        </label>
+
+        <label class="idj-field">
+          <span>Verificación (id o url)</span>
+          <input id="verification" spellcheck="false" autocomplete="off" />
+        </label>
+
+        <label class="idj-check"><input id="close-on-complete" type="checkbox" /> close() al completar</label>
+
+        <div class="idj-actions">
+          <button id="open" type="button">Abrir</button>
+          <button id="open-twice" type="button">Abrir dos veces</button>
+          <button id="close-later" type="button">close() a los 3 s</button>
+        </div>
+      </section>
+
+      <section class="idj-card">
+        <div class="idj-log-head">
+          <h2>Log</h2>
+          <button id="clear" type="button">Limpiar</button>
+        </div>
+        <pre id="log" class="idj-log"></pre>
+      </section>
+    </main>
+  </body>
+</html>

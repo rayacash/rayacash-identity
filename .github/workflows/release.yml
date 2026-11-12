@@ -1,0 +1,74 @@
+# Publica en npm al publicar un release de GitHub con tag vX.Y.Z.
+#
+# Usa Trusted Publishing (OIDC, sin tokens guardados). npm solo lo deja configurar en un paquete
+# que ya existe: la primera versión se publica a mano, con `npm publish`. Después, en
+# npmjs.com › rayacash-identity › Settings › Trusted publishing: GitHub Actions, owner rayacash, repo
+# rayacash-identity, workflow release.yml, environment npm, con «npm publish» permitido. Y en
+# GitHub › Settings › Environments, crear «npm».
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build y tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: El tag tiene que coincidir con la versión
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "El tag $GITHUB_REF_NAME no coincide con la versión $version de package.json" >&2
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      # La entrada de la versión en el CHANGELOG, lista para publicar: sin «sin publicar» y con el
+      # integrity de identity.js, el mismo de los bytes que van a npm y al CDN.
+      - name: El CHANGELOG trae el integrity de esta versión
+        run: node build.mjs --release
+      - run: npm run check:package
+      - run: npm pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: rayacash-identity-*.tgz
+
+  publish:
+    name: Publicar en npm
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/rayacash-identity
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      # Trusted Publishing necesita npm 11.5.1 o más nuevo.
+      - run: npm install -g npm@11
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+      - name: Publicar (si la versión ya está en npm, no hace nada)
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if npm view "rayacash-identity@$version" version >/dev/null 2>&1; then
+            echo "::notice::rayacash-identity@$version ya está en npm: no publico nada."
+            exit 0
+          fi
+          npm publish "rayacash-identity-$version.tgz" --access public

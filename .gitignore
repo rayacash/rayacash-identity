@@ -1,0 +1,38 @@
+# Dependencias
+node_modules/
+
+# Build: lo genera npm run build (y prepack); va en el paquete de npm, no en git
+dist/
+
+# Output de npm pack
+*.tgz
+
+# Guía local del paquete: no se commitea ni se publica
+SDK.md
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Cobertura
+coverage
+*.lcov
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Caches de npm y de linters
+.npm
+.eslintcache
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store

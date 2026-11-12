@@ -1,0 +1,380 @@
+{
+  "_": [
+    "El protocolo postMessage v1 entre Identity.js (src/protocol.ts) y la página alojada de Raya (raya-web, utils/identityEmbed.ts).",
+    "Lo leen test/protocol-snapshot.test.ts (siempre, también en el CI de este repo) y test/parity.test.ts (cuando encuentra la web).",
+    "Un cambio de protocolo se hace en los dos lados y acá, a propósito: v1/ en el CDN y las 1.x instaladas por npm siguen hablando este."
+  ],
+  "constants": {
+    "source": "raya-identity",
+    "version": 1,
+    "frameTypes": [
+      "hello",
+      "ready",
+      "step",
+      "completed",
+      "fallback",
+      "close"
+    ],
+    "parentTypes": [
+      "init",
+      "close"
+    ],
+    "steps": [
+      "intro",
+      "front",
+      "back",
+      "liveness",
+      "processing",
+      "done",
+      "unavailable"
+    ],
+    "completed": [
+      "processing",
+      "verified",
+      "declined"
+    ],
+    "fallbacks": [
+      "camera_blocked",
+      "storage_blocked",
+      "unsupported"
+    ],
+    "tokenRe": "^[a-z][a-z_]{0,31}$",
+    "identityPath": "/identity/",
+    "embedQuery": "?embed=1"
+  },
+  "nonceRe": "^[A-Za-z0-9_-]{16,128}$",
+  "sample": {
+    "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+    "nonce": "0123456789abcdef0123456789abcdef",
+    "origin": "https://raya.cash",
+    "parentOrigin": "https://comercio.example"
+  },
+  "parent": [
+    {
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "init",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef"
+      },
+      "read": {
+        "type": "init",
+        "origin": "https://comercio.example",
+        "nonce": "0123456789abcdef0123456789abcdef"
+      },
+      "context": "primer init"
+    },
+    {
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "close",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef"
+      },
+      "read": {
+        "type": "close"
+      },
+      "context": "después del init"
+    }
+  ],
+  "frame": [
+    {
+      "type": "hello",
+      "nonce": null,
+      "extra": null,
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "hello",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH"
+      },
+      "read": {
+        "type": "hello"
+      }
+    },
+    {
+      "type": "ready",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": null,
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "ready",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef"
+      },
+      "read": {
+        "type": "ready"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "intro"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "intro"
+      },
+      "read": {
+        "type": "step",
+        "step": "intro"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "front"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "front"
+      },
+      "read": {
+        "type": "step",
+        "step": "front"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "back"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "back"
+      },
+      "read": {
+        "type": "step",
+        "step": "back"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "liveness"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "liveness"
+      },
+      "read": {
+        "type": "step",
+        "step": "liveness"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "processing"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "processing"
+      },
+      "read": {
+        "type": "step",
+        "step": "processing"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "done"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "done"
+      },
+      "read": {
+        "type": "step",
+        "step": "done"
+      }
+    },
+    {
+      "type": "step",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "step": "unavailable"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "step",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "step": "unavailable"
+      },
+      "read": {
+        "type": "step",
+        "step": "unavailable"
+      }
+    },
+    {
+      "type": "completed",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "status": "processing"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "completed",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "status": "processing"
+      },
+      "read": {
+        "type": "completed",
+        "status": "processing"
+      }
+    },
+    {
+      "type": "completed",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "status": "verified"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "completed",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "status": "verified"
+      },
+      "read": {
+        "type": "completed",
+        "status": "verified"
+      }
+    },
+    {
+      "type": "completed",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "status": "declined"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "completed",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "status": "declined"
+      },
+      "read": {
+        "type": "completed",
+        "status": "declined"
+      }
+    },
+    {
+      "type": "fallback",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "reason": "camera_blocked"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "fallback",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "reason": "camera_blocked"
+      },
+      "read": {
+        "type": "fallback",
+        "reason": "camera_blocked"
+      }
+    },
+    {
+      "type": "fallback",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "reason": "storage_blocked"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "fallback",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "reason": "storage_blocked"
+      },
+      "read": {
+        "type": "fallback",
+        "reason": "storage_blocked"
+      }
+    },
+    {
+      "type": "fallback",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": {
+        "reason": "unsupported"
+      },
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "fallback",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef",
+        "reason": "unsupported"
+      },
+      "read": {
+        "type": "fallback",
+        "reason": "unsupported"
+      }
+    },
+    {
+      "type": "close",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "extra": null,
+      "message": {
+        "source": "raya-identity",
+        "v": 1,
+        "type": "close",
+        "id": "idv_3kT9vQ2mXw7Lp0aBcD4eF6gH",
+        "nonce": "0123456789abcdef0123456789abcdef"
+      },
+      "read": {
+        "type": "close"
+      }
+    }
+  ],
+  "hosted": {
+    "frameUrl": "https://raya.cash/identity/idv_3kT9vQ2mXw7Lp0aBcD4eF6gH?embed=1",
+    "isHostedPath": true,
+    "topUrl": "https://raya.cash/identity/idv_3kT9vQ2mXw7Lp0aBcD4eF6gH"
+  }
+}

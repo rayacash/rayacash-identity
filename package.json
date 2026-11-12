@@ -1,0 +1,70 @@
+{
+  "name": "rayacash-identity",
+  "version": "1.0.0",
+  "description": "Identity.js de Raya Cash: la verificación de identidad de Raya (DNI y prueba de vida) en una ventana sobre tu sitio, sin claves en el navegador.",
+  "keywords": [
+    "raya",
+    "raya cash",
+    "identidad",
+    "verificación de identidad",
+    "identity",
+    "kyc",
+    "dni",
+    "prueba de vida",
+    "argentina",
+    "navegador",
+    "frontend"
+  ],
+  "homepage": "https://raya.cash/api/identity",
+  "bugs": {
+    "url": "https://github.com/rayacash/rayacash-identity/issues",
+    "email": "soporte@raya.cash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayacash/rayacash-identity.git"
+  },
+  "license": "MIT",
+  "author": "Raya Cash <soporte@raya.cash>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/identity.d.mts",
+        "default": "./dist/identity.mjs"
+      },
+      "require": {
+        "types": "./dist/identity.d.cts",
+        "default": "./dist/identity.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/identity.cjs",
+  "module": "./dist/identity.mjs",
+  "types": "./dist/identity.d.cts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test \"test/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.test.json",
+    "demo": "node build.mjs --serve",
+    "check": "npm run typecheck && npm test && npm run build",
+    "check:package": "node build.mjs && publint --strict && attw --pack .",
+    "prepack": "node build.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "@types/node": "22.20.5",
+    "esbuild": "0.25.9",
+    "publint": "0.3.25",
+    "typescript": "5.9.2"
+  }
+}

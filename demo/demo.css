@@ -1,0 +1,133 @@
+.idj-body,
+.idj-nested,
+.idj-frame {
+  margin: 0;
+  background: #f5f6f8;
+  color: #111827;
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.idj-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.idj-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.idj-muted {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+
+.idj-card {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.idj-field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.idj-field span {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.idj-field input,
+.idj-field select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.idj-check {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.idj-danger {
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fef3c7;
+}
+
+.idj-danger p {
+  margin: 0 0 8px;
+}
+
+.idj-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.idj-actions button,
+.idj-log-head button,
+.idj-frame button {
+  padding: 8px 14px;
+  border: 1px solid #111827;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.idj-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.idj-log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.idj-log-head h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.idj-log {
+  overflow-x: auto;
+  min-height: 120px;
+  margin: 8px 0 0;
+  font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+}
+
+.idj-nested {
+  padding: 16px;
+}
+
+.idj-nested-frame {
+  width: 100%;
+  height: 80vh;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.idj-frame {
+  padding: 24px;
+  background: #ffffff;
+}
+
+.idj-frame-events {
+  padding-left: 20px;
+  font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+}
