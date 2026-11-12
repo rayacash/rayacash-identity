@@ -37,7 +37,7 @@ const EXPECTED_TYPESCRIPT = "5.9.2";
 // El host del CDN está acá y en un solo lugar: cambiarlo es esta línea + rebuild.
 // dist/identity.js se sirve en CDN_BASE/v<X.Y.Z>/ (inmutable) y en CDN_BASE/v<mayor>/
 // (la última de esa mayor). test/docs.test.ts lee esta línea.
-const CDN_BASE = "https://js.raya.cash/identity";
+const CDN_BASE = "https://cdn.raya.cash/identity";
 const MAX_GZIP_BYTES = 8 * 1024;
 
 function fail(message) {

@@ -16,7 +16,7 @@ const result = await identity.open(id); // el id que te devolvió tu servidor
 O, sin bundler, con un `<script>` desde el CDN de Raya:
 
 ```html
-<script src="https://js.raya.cash/identity/v1/identity.js"></script>
+<script src="https://cdn.raya.cash/identity/v1/identity.js"></script>
 <script>
   RayaIdentity().open(id); // el id que te devolvió tu servidor
 </script>
@@ -91,7 +91,7 @@ Sin bundler, cargá Identity.js desde el CDN de Raya. Deja `RayaIdentity` en `wi
 ```html
 <button id="verificar" type="button">Verificar mi identidad</button>
 
-<script src="https://js.raya.cash/identity/v1/identity.js"></script>
+<script src="https://cdn.raya.cash/identity/v1/identity.js"></script>
 <script>
   const identity = RayaIdentity();
   document.querySelector("#verificar").addEventListener("click", async () => {
@@ -110,7 +110,7 @@ Sin bundler, cargá Identity.js desde el CDN de Raya. Deja `RayaIdentity` en `wi
 
   ```html
   <script
-    src="https://js.raya.cash/identity/v1.0.0/identity.js"
+    src="https://cdn.raya.cash/identity/v1.0.0/identity.js"
     integrity="sha384-…"
     crossorigin="anonymous"
   ></script>
@@ -121,7 +121,7 @@ Sin bundler, cargá Identity.js desde el CDN de Raya. Deja `RayaIdentity` en `wi
 - Usá una sola de las dos formas en cada página: el `<script>` y el paquete de npm son dos copias de la librería y no se ven entre sí.
 - Si tu sitio manda una CSP, sumá el CDN a `script-src` (ver [Content-Security-Policy y Permissions-Policy](#content-security-policy-y-permissions-policy)). Sin `'unsafe-inline'`, un `<script>` inline como el de arriba no corre: poné ese código en un archivo de tu sitio o dale el nonce de tu página.
 - Si monitoreás los errores de la página (`window.onerror` o una herramienta de errores), sumá `crossorigin="anonymous"` también al `<script>` de `v1`, sin `integrity`: sin eso, el navegador te los muestra como «Script error.», sin el mensaje. El CDN manda `Access-Control-Allow-Origin: *`.
-- Cargalo siempre desde `js.raya.cash`, nunca desde un CDN de terceros que sirva paquetes de npm.
+- Cargalo siempre desde `cdn.raya.cash`, nunca desde un CDN de terceros que sirva paquetes de npm.
 - Los tipos del global están en `identity.d.ts`, en la misma carpeta del CDN y en `dist/` del paquete. `identity.debug.js` es lo mismo sin minificar, para depurar.
 
 ## Inicio rápido
@@ -226,12 +226,12 @@ frame-src https://raya.cash;
 Con el `<script>` del CDN, sumá también el CDN a `script-src`, junto a lo que ya tenga (como `'self'`):
 
 ```
-script-src 'self' https://js.raya.cash;
+script-src 'self' https://cdn.raya.cash;
 ```
 
 Con npm, Identity.js va adentro de tu bundle: `script-src` no cambia.
 
-Con esa CSP, el código de tu página no puede ir en un `<script>` inline como el de [Con un `<script>` (CDN)](#con-un-script-cdn): ponelo en un archivo de tu sitio, que cubre `'self'`, o dale al `<script>` inline el nonce de tu página (`script-src 'self' 'nonce-…' https://js.raya.cash`).
+Con esa CSP, el código de tu página no puede ir en un `<script>` inline como el de [Con un `<script>` (CDN)](#con-un-script-cdn): ponelo en un archivo de tu sitio, que cubre `'self'`, o dale al `<script>` inline el nonce de tu página (`script-src 'self' 'nonce-…' https://cdn.raya.cash`).
 
 - Sin `frame-src`, el navegador usa `child-src` o `default-src`; sin `script-src`, `default-src`: sumá la directiva o agregá el origen ahí. Si pasás otro origen de Raya en `baseUrl`, sumalo también a `frame-src`.
 - Si tu `script-src` usa `'strict-dynamic'`, la lista de hosts no cuenta: poné el nonce de tu página en el `<script>` de Identity.js.
@@ -253,7 +253,7 @@ Si tu página vive adentro de otro iframe, ese iframe necesita `allow="camera"`.
 - Nunca pongas la clave secreta en el navegador: vive en tu servidor, con el SDK `rayacash`. `RayaIdentity()` no usa ninguna clave, tampoco la pública.
 - El `id` abre la verificación para quien lo tenga: dáselo solo a la persona que tiene que verificarse.
 - La librería solo enmarca orígenes de Raya (`raya.cash` y sus subdominios, en https) o localhost, para desarrollar. El origen sale de `baseUrl`, nunca de la URL que le pases.
-- Instalala con npm o cargala con el `<script>` de `js.raya.cash`, nunca desde un CDN de terceros. Con una versión fija y su `integrity`, el navegador solo corre ese archivo exacto.
+- Instalala con npm o cargala con el `<script>` de `cdn.raya.cash`, nunca desde un CDN de terceros. Con una versión fija y su `integrity`, el navegador solo corre ese archivo exacto.
 
 ## Referencia
 
@@ -350,7 +350,7 @@ Si `body` tiene un `transform`, `filter` o `contain`, la ventana se posiciona re
 
 **¿Puedo no usar la librería?** Sí: llevá a la persona a `verification.url` en la misma pestaña y usá `return_url` para que vuelva.
 
-**¿npm o el `<script>`?** Si tu sitio usa un bundler (Vite, webpack, Next.js, Nuxt), npm: la versión queda en tu `package.json`, con los tipos, y tu CSP solo suma el iframe. Si no, el `<script>` de `js.raya.cash` ([Con un `<script>` (CDN)](#con-un-script-cdn)). Es el mismo código.
+**¿npm o el `<script>`?** Si tu sitio usa un bundler (Vite, webpack, Next.js, Nuxt), npm: la versión queda en tu `package.json`, con los tipos, y tu CSP solo suma el iframe. Si no, el `<script>` de `cdn.raya.cash` ([Con un `<script>` (CDN)](#con-un-script-cdn)). Es el mismo código.
 
 **¿Necesito el SDK `rayacash` en el navegador?** No. `rayacash` va en tu servidor, con la clave secreta; en el navegador solo va `rayacash-identity`, que no usa claves.
 
